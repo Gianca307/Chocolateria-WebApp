@@ -24,10 +24,11 @@ public class SecurityConfiguration {
 			.authorizeHttpRequests(request -> request
 					.requestMatchers("/", "home/**", "/buscar", "/carrito").permitAll() // esto es para que cualquier persona pueda acceder a estas direcciones
 					.requestMatchers("/js/home.js", "/js/carrito.js").permitAll()
-					.requestMatchers(("/panels/gestorRoles")).hasAuthority("ROL_ADMIN")
-					.requestMatchers(("/panels/actualizarRolUsuario")).hasAuthority("ROL_ADMIN")
-					.requestMatchers(("/valorAgregado/**")).hasAuthority("ROL_ADMIN")
-					.requestMatchers(("/registro")).hasAuthority("ROL_ADMIN")
+					.requestMatchers("/img/**").permitAll()
+					.requestMatchers("/panels/gestorRoles").hasAuthority("ROL_ADMIN")
+					.requestMatchers("/panels/actualizarRolUsuario").hasAuthority("ROL_ADMIN")
+					.requestMatchers("/valorAgregado/**").hasAuthority("ROL_ADMIN")
+					.requestMatchers("/registro").hasAuthority("ROL_ADMIN")
 					.anyRequest().authenticated())
 			.formLogin(httpSecurityFormLoginConfigurer -> httpSecurityFormLoginConfigurer // este es el formulario de login, se recicle
 					.loginPage("/login")
