@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/headerControls}"></head>
+
+<body class="container mt-1">
+
+<h2>Agregar Categoria Producto Oferta</h2>
+
+<form th:action="@{/categoriaProductoOferta/agregarCategoriaProductoOferta}" method="post" class="form">
+    <div class="form-group">
+        <label for="categoria">Categoria Producto Oferta:</label>
+        <input type="text" id="categoria" name="categoria" class="form-control" required>
+    </div>
+
+   <br>
+
+    <button type="submit" class="btn btn-success">Guardar Categoría Producto Oferta</button>
+</form>
+
+<hr>
+
+<a th:href="@{/categoriaProductoOferta/listar}" class="btn btn-primary my-3">Ver Lista Categoria Productos</a>
+
+</body>
+</html>

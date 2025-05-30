@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/headerControls}"></head>
+
+<body class="container mt-1">
+
+<div class="container-fluid row align-items-center my-3">
+	<div class="col d-flex align-items-center">
+		<h1 class="m-0">Lista de Insumos</h1>	
+	</div>
+	<div class="col d-flex justify-content-end align-items-center">
+		<a sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')" th:href="@{/insumos/agregarInsumo}" class="btn btn-success">Agregar Insumo</a>
+	</div>	
+</div>
+
+<div class="row">
+	<div class="card shadow mx-3 my-3" style="width: 18rem;" th:each="insumo : ${insumos}">
+	  <img th:src="${insumo.img}" class="card-img-top" style="max-height: 20vh; width: 100%; object-fit: contain;" alt="...">
+	  <div class="card-body row">
+	  	<div class="align-items-center">
+		    <p class="card-text" th:text="${insumo.descripcion}"></p>		  	
+	  	</div>
+	    <div class="align-items-center" sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')">
+	         <a th:href="@{/insumos/actualizarInsumo/{id}(id=${insumo.id})}" class="btn">
+	         	<i class="fa-regular fa-pen-to-square fa-lg" style="color: #1d8301;"></i>
+	         </a>
+	      	 <button th:onclick="'eliminarInsumoConfirmacion('+${insumo.id}+');'" class="btn">
+	         	<i class="fa-solid fa-trash fa-lg" style="color: #bd0000;"></i>
+	         </button>
+	    </div>
+	  </div>
+	  <ul class="list-group list-group-flush">
+	    <li class="list-group-item" th:text="|Contenido: ${insumo.cantidad} ${insumo.unidad}|"></li>
+	    <li class="list-group-item" th:text="|Costo: ${insumo.costoInsumo}|"></li>
+	    <li class="list-group-item" th:text="|Stock: ${insumo.stock} ${insumo.unidad}|"></li>
+	    <li class="list-group-item" th:text="${insumo.categoriaProducto} != null ? |Categoría: ${insumo.categoriaProducto.categoria}| : 'Categoria no disponible' "></li>
+	    <li class="list-group-item" th:text="${insumo.proveedor} != null ? |Proveedor: ${insumo.proveedor.nombreEmpresa}| : 'Proveedor no disponible'"></li>
+	  </ul>
+	  <div class="card-body">
+	    <a th:each="link : ${insumo.links}" th:href="${link}" class="icon-link icon-link-hover link-success link-underline-success link-underline-opacity-25">
+	      Link
+		  <svg xmlns="http://www.w3.org/2000/svg" class="bi" viewBox="0 0 16 16" aria-hidden="true">
+		    <path d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"/>
+		  </svg>
+		</a>
+	  </div>
+	</div>
+</div>
+
+
+<script sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')">
+    function eliminarInsumoConfirmacion(id) {
+        Swal.fire({
+            title: '¿Desea eliminar el insumo seleccionado?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = '/insumos/eliminarInsumo/' + id;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

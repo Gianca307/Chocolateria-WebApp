@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head th:insert="~{fragments/headerControls}"></head>
+<body class="container mt-1">
+
+<div class="container-fluid row align-items-center my-3">
+	<div class="col d-flex align-items-center">
+		<h2 class="mb-4">Panel - Gestor Roles (Solo <b>ADMIN</b>)</h2>
+	</div>
+	<div class="col d-flex justify-content-end align-items-center">
+		<a class="btn btn-success" th:href="@{/registro}">Registrar Usuario</a>
+	</div>	
+</div>
+
+
+
+<table class="table table-bordered mb-4">
+	<div>
+		
+	</div>
+
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Username</th>
+    <th>Rol</th>
+    <th>Nombre</th>
+    <th>Apellido</th>
+    <th sec:authorize="hasAuthority('ROL_ADMIN')">Acciones</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="usuario : ${usuarios}">
+    <td style="vertical-align: middle;" th:text="${usuario.id}"></td>
+    <td style="vertical-align: middle;" th:text="${usuario.username}"></td>
+    <td style="vertical-align: middle;" th:text="${usuario.rol}"></td>
+    <td style="vertical-align: middle;" th:text="${usuario.nombre}"></td>
+    <td style="vertical-align: middle;" th:text="${usuario.apellido}"></td>
+
+    <!-- Botones de eliminar y actualizar usuario -->
+    <td sec:authorize="hasAuthority('ROL_ADMIN')">
+      <button th:onclick="'eliminarUsuarioConfirmacion(\'' + ${usuario.id} + '\');'" class="btn btn-danger">Eliminar</button>
+      <a th:href="@{/panels/actualizarRolUsuario/{id}(id=${usuario.id})}" class="btn btn-warning">Actualizar</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+
+
+<script>
+  function eliminarUsuarioConfirmacion(id) {
+    Swal.fire({
+      title: '¿Desea eliminar el usuario seleccionado?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Eliminar',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        location.href = '/panels/eliminarUsuario/' + id;
+      }
+    });
+  }
+</script>
+
+</body>
+</html>

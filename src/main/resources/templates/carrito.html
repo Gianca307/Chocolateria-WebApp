@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head th:insert="~{fragments/headerNoLogin}"></head>
+<body>
+	<header th:insert="~{fragments/header}"></header>
+		
+	<main class="container p-2 my-5" style="min-height: 60vh;">
+		<section class="container" id="carrito"></section>
+	</main>
+	
+	<footer th:insert="~{fragments/footer}"></footer>
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:src="@{/js/carrito.js}"></script>
+	
+	<style>
+    	.whatsapp-btn {
+      	display: inline-block;
+      	background-color: #1B853E;
+      	color: white;
+      	padding: 12px 20px;
+      	border-radius: 5px;
+      	text-decoration: none;
+      	font-weight: bold;
+      	font-size: 16px;
+      	transition: background-color 0.3s ease;
+	    }
+	
+	    .whatsapp-btn:hover {
+	      background-color: #1ebe5b;
+	      cursor: pointer;
+	    }
+	</style>
+	
+</body>
+</html>

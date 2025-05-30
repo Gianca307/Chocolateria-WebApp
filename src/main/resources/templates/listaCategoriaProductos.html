@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/headerControls}"></head>
+
+<body class="container mt-1">
+
+<div class="container-fluid row align-items-center my-3">
+	<div class="col d-flex align-items-center">
+		<h1 class="m-0">Lista de Categoria Insumos</h1>	
+	</div>
+	<div class="col d-flex justify-content-end align-items-center">
+		<a sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')" th:href="@{/categoriaProductos/agregarCategoriaProducto}" class="btn btn-success">Agregar Categoria</a>
+	</div>	
+</div>
+
+<table class="table table-bordered table-striped table-hover align-middle w-auto">
+  <thead>
+    <tr>
+      <th scope="col">Categoría</th>
+      <th sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')" scope="col">Acciones</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr th:each="categoriaProducto : ${categoriaProductos}">
+      <td th:text="${categoriaProducto.categoria}"></td>
+      <td sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')">
+         <button th:onclick="'eliminarCategoriaProductoConfirmacion('+${categoriaProducto.id}+');'" class="btn btn-danger">Eliminar</button>
+         <a th:href="@{/categoriaProductos/actualizarCategoriaProducto/{id}(id=${categoriaProducto.id})}" class="btn btn-warning">Actualizar</a>
+      </td>
+    </tr>
+   
+  </tbody>
+</table>
+
+<script sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')">
+    function eliminarCategoriaProductoConfirmacion(id) {
+        Swal.fire({
+            title: '¿Desea eliminar la categoría seleccionada?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = '/categoriaProductos/eliminarCategoriaProducto/' + id;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>

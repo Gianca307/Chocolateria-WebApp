@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:insert="~{fragments/headerControls}"></head>
+
+<body class="container mt-1">
+
+<div class="container-fluid row align-items-center my-3">
+	<div class="col d-flex align-items-center">
+		<h1 class="m-0">Proveedores</h1>	
+	</div>
+	<div class="col d-flex justify-content-end align-items-center">
+		<a sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')" th:href="@{/proveedores/agregarProveedor}" class="btn btn-success">Agregar Proveedor</a>
+	</div>	
+</div>
+
+<div class="row">
+	<div th:each="proveedor : ${proveedores}" class="card border-info shadow my-3 mx-3 w-auto">
+	  <div class="card-header row align-items-center">
+	  	<div class="col d-flex align-items-center">
+		  	<h5 th:text="${proveedor.nombreEmpresa}" class="card-title"></h5>
+	  	</div>
+	  	<div class="col d-flex justify-content-end align-items-center" sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')">
+	         <a th:href="@{/proveedores/actualizarProveedor/{id}(id=${proveedor.id})}" class="btn">
+	         	<i class="fa-regular fa-pen-to-square fa-lg" style="color: #1d8301;"></i>
+	         </a>
+	      	 <button th:onclick="'eliminarProveedorConfirmacion('+${proveedor.id}+');'" class="btn">
+	         	<i class="fa-solid fa-trash fa-lg" style="color: #bd0000;"></i>
+	         </button>
+	    </div>
+	  </div>
+	  <div class="card-body">
+	    <p class="mb-1 card-text"><strong>Teléfono: </strong><span th:text="${proveedor.telefonoContacto}"></span></p>
+	    <p class="mb-1 card-text"><strong>Vendedor: </strong> <span th:text="${proveedor.nombreVendedor}"></span></p>
+	    <p class="mb-1 card-text"><strong>Correo: </strong> <span th:text="${proveedor.email}"></span></p>
+	    <p class="mb-1 card-text"><strong>Página: </strong> <a th:href="${proveedor.paginaWeb}" class="text-decoration-none text-success" th:text="${proveedor.paginaWeb}"></a></p>
+	    <p class="mb-1 card-text"><strong>Horario de Atención: </strong> <span th:text="${proveedor.horaAtencion}"></span></p>
+	    <p class="mb-0 card-text"><strong>Dirección: </strong> <span th:text="${proveedor.direccion}"></span></p>
+	  </div>
+	</div>
+</div>
+
+
+<script sec:authorize="hasAnyAuthority('ROL_ADMIN','ROL_ESCRITURA')">
+    function eliminarProveedorConfirmacion(id) {
+        Swal.fire({
+            title: '¿Desea eliminar el proveedor seleccionado?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#d33',
+            cancelButtonColor: '#3085d6',
+            confirmButtonText: 'Eliminar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                location.href = '/proveedores/eliminarProveedor/' + id;
+            }
+        });
+    }
+</script>
+
+</body>
+</html>
