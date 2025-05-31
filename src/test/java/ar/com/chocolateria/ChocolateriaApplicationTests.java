@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ChocolateriaApplicationTests {
+class ChocolateriaApplicationTests extends BaseTest {
 
 	@Test
 	void contextLoads() {

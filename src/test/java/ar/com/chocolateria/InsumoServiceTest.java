@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional
-public class InsumoServiceTest {
+public class InsumoServiceTest extends BaseTest{
 	private final InsumoService insumoService;
 	private final ProveedorService proveedorService;
 	private final CategoriaProductoService categoriaProductoService;

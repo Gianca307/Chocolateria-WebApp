@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 @Transactional
-public class ProveedorServiceTest {
+public class ProveedorServiceTest extends BaseTest{
 	private final ProveedorService proveedorService;
 	private Proveedor proveedorGuardado;
 	
