@@ -172,7 +172,7 @@ function mensajeWhatsapp () {
 	
 	mensaje += `Total: $${total}.`;
 	
-	const numeroTelefono = "5492645711922"; //
+	const numeroTelefono = "2222222222"; //
 	const enlace = `https://wa.me/${numeroTelefono}?text=${encodeURIComponent(mensaje)}`;
 	
 	btnWhatsapp.href = enlace;
