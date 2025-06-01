@@ -6,37 +6,37 @@
 
 <h2 class="mb-4">Actualizar Producto</h2>
 
-<form th:action="@{/productos/actualizarProducto/{id}(id=${producto.id})}" method="post" class="form">
+<form th:action="@{/productos/actualizarProducto/{id}(id=${producto.id})}" method="post" class="form row">
 	<input type="hidden" name="_method" value="put">
     
-    <div class="form-group m-2">
+    <div class="form-group col-12 col-md-6 m-2">
         <label class="m-1" for="descripcion">Descripcion:</label>
         <input type="text" id="descripcion" name="descripcion" th:value="${producto.descripcion}" class="form-control" required>
     </div>
     
-    <div class="form-group m-2">
+    <div class="form-group col-12 col-md-6 m-2">
         <label class="m-1" for="idCategoriaProductoOferta">Categoria:</label>
         <select class="form-control m-1" id="idCategoriaProductoOferta" name="idCategoriaProductoOferta" required>
             <option th:each="categoriaProductoOferta : ${categoriaProductosOfertas}" th:value="${categoriaProductoOferta.id}" th:text="${categoriaProductoOferta.categoria}" th:selected="${producto.categoriaProductoOferta != null ? (categoriaProductoOferta.id == producto.categoriaProductoOferta.id) : false}"></option>
         </select>
     </div>
 	
-	<section class="my-3 container row text-center">
-		<article class="col">
+	<section class="row text-center my-3">
+		<article class="col-12 col-md-4 my-2">
 			<div class="form-group my-3">
 		        <label for="costoBase">Costo Base:</label>
 		        <input type="number" step="0.01" min="0.01" id="costoBase" name="costoBase" class="form-control" th:value="${producto.costoBase != null ? producto.costoBase : 0}" required readonly>
 		    </div>
 		</article>
 		
-		<article class="col">
+		<article class="col-12 col-md-4 my-2">
 		    <div class="form-group my-3">
 		        <label for="precio">Precio:</label>
 		        <input type="number" step="0.01" min="0.01" id="precio" name="precio" class="form-control" th:value="${producto.precio}" required>
 		    </div>
 		</article>
 		
-		<article class="col">
+		<article class="col-12 col-md-4 my-2">
 		    <div class="my-3">
 		    	<h6>% Adicional</h6>
 		    	<p id="costoAdic" th:text="${costoAdic.get}"></p>
@@ -46,17 +46,17 @@
 	
 	<section class="conteiner row">
 		<div class="row">
-			<h6 class="col">Precio sugerido:</h6>
-			<p class="col" id="precioSugerido"></p>
+			<h6 class="col-6 col-md-3">Precio sugerido:</h6>
+			<p class="col-6 col-md-9" id="precioSugerido"></p>
 		</div>
 	</section>
     
-    <div class="form-group m-2">
+    <div class="form-group col-12 m-2">
         <label class="m-1" for="imgUrl">Imagen:</label>
         <input type="text" id="imgUrl" name="imgUrl" th:value="${producto.imgUrl}" class="form-control m-1" required>
     </div>
     
-    <div class="form-group m-2">
+    <div class="form-group col-12 col-md-6 m-2">
     	<label class="m-1" for="disponible">Disponible:</label>
 	    <select id="disponible" class="form-select m-1" name="disponible" aria-label="Default select example" required>
 		  <option selected value="1">Disponible</option>
@@ -66,65 +66,69 @@
     	
 	<h1 class="mt-2">Insumos:</h1>
 	<h2>Insumos Seleccionados</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nombre</th>
-                    <th>Cantidad (en unidades)</th>
-                    <th>Precio</th>                    
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody id="lista-insumos-productos" class="form-group">
-                <tr th:each="insumoProducto : ${producto.insumosProductos}">
-                	
-                	<td th:text="${insumoProducto.insumo != null ? insumoProducto.insumo.descripcion : 'Insumo no disponble'}"></td>
-			        <td><input type="number" name="insumosProductos[0].cantidad" th:value="${insumoProducto.cantidad}" min="1" oninput="actualizarCostoPrecio()" required></td>
-			        <td><input type="number" step="0.01" oninput="actualizarCostoPrecio()" required></td>
-			        <td>
-			            <input type="hidden" name="insumosProductos[0].insumo.id" th:value="${insumoProducto.insumo != null ? insumoProducto.insumo.id : 'Insumo inexistente'}">
-			            <input type="hidden" name="insumosProductos[0].id" th:value="${insumoProducto.id}">
-			            <button type="button" class="btn btn-secondary" onclick="eliminarInsumo(this)">Eliminar</button>
-			        </td>
-                </tr>
-            </tbody>
-        </table>	
+		<div class="table-responsive">
+	        <table class="table">
+	            <thead>
+	                <tr>
+	                    <th>Nombre</th>
+	                    <th>Cantidad (en unidades)</th>
+	                    <th>Precio</th>                    
+	                    <th></th>
+	                </tr>
+	            </thead>
+	            <tbody id="lista-insumos-productos" class="form-group">
+	                <tr th:each="insumoProducto : ${producto.insumosProductos}">
+	                	
+	                	<td th:text="${insumoProducto.insumo != null ? insumoProducto.insumo.descripcion : 'Insumo no disponble'}"></td>
+				        <td><input type="number" name="insumosProductos[0].cantidad" th:value="${insumoProducto.cantidad}" min="1" oninput="actualizarCostoPrecio()" required></td>
+				        <td><input type="number" step="0.01" oninput="actualizarCostoPrecio()" required></td>
+				        <td>
+				            <input type="hidden" name="insumosProductos[0].insumo.id" th:value="${insumoProducto.insumo != null ? insumoProducto.insumo.id : 'Insumo inexistente'}">
+				            <input type="hidden" name="insumosProductos[0].id" th:value="${insumoProducto.id}">
+				            <button type="button" class="btn btn-secondary" onclick="eliminarInsumo(this)">Eliminar</button>
+				        </td>
+	                </tr>
+	            </tbody>
+	        </table>	
+		</div>
    
     <br>
 
-    <button type="submit" class="btn btn-success">Actualizar Producto</button>
+    <button type="submit" class="btn btn-success w-100 w-sm-auto">Actualizar Producto</button>
 </form>
 
 <h1>Lista de Insumos</h1>
 
-<table class="table table-bordered my-5">
-  <thead>
-    <tr>
-      <th scope="col">Descripción</th>
-      <th scope="col">Cantidad</th>
-      <th scope="col">Costo</th>
-      <th scope="col">Costo por unidad</th>
-      <th scope="col">Stock</th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr th:each="insumo : ${insumos}">
-      <td style="vertical-align: middle;" th:text="${insumo.descripcion}"></td>
-      <td style="vertical-align: middle;" th:text="|${insumo.cantidad} ${insumo.unidad}|"></td>
-      <td style="vertical-align: middle;" th:text="|$ ${insumo.costoInsumo}|"></td>
-      <td style="vertical-align: middle;" th:text="|$ ${insumo.costoInsumo/insumo.cantidad}|"></td>
-      <td style="vertical-align: middle;" th:text="|${insumo.stock} ${insumo.unidad}|"></td>
-      <td>
-      	<button type="button" class="btn btn-secondary" th:attr="onclick='agregarInsumo(' + ${insumo.id} + ', \''
-        + ${insumo.descripcion} + '\', '
-        + ${insumo.cantidad} + ', \''
-        + ${insumo.costoInsumo} + '\')'">Agregar</button>
-      </td>
-    </tr>
-   
-  </tbody>
-</table>
+<div class="table-responsive">
+	<table class="table table-bordered my-5">
+	  <thead>
+	    <tr>
+	      <th scope="col">Descripción</th>
+	      <th scope="col">Cantidad</th>
+	      <th scope="col">Costo</th>
+	      <th scope="col">Costo por unidad</th>
+	      <th scope="col">Stock</th>
+	      <th></th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="insumo : ${insumos}">
+	      <td style="vertical-align: middle;" th:text="${insumo.descripcion}"></td>
+	      <td style="vertical-align: middle;" th:text="|${insumo.cantidad} ${insumo.unidad}|"></td>
+	      <td style="vertical-align: middle;" th:text="|$ ${insumo.costoInsumo}|"></td>
+	      <td style="vertical-align: middle;" th:text="|$ ${insumo.costoInsumo/insumo.cantidad}|"></td>
+	      <td style="vertical-align: middle;" th:text="|${insumo.stock} ${insumo.unidad}|"></td>
+	      <td>
+	      	<button type="button" class="btn btn-secondary" th:attr="onclick='agregarInsumo(' + ${insumo.id} + ', \''
+	        + ${insumo.descripcion} + '\', '
+	        + ${insumo.cantidad} + ', \''
+	        + ${insumo.costoInsumo} + '\')'">Agregar</button>
+	      </td>
+	    </tr>	   
+	  </tbody>
+	</table>
+</div>
+
 
 <script th:src="@{/js/actualizarProductoForm.js}"></script>
 

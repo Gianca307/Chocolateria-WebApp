@@ -4,17 +4,17 @@
 
 <body class="container mt-1">
 
-<h2 class="mb-2">Actualizar Categoría Producto</h2>
+<h2 class="mb-2 text-center text-md-start">Actualizar Categoría Producto</h2>
 
 <form class="p-2 my-3" th:action="@{/categoriaProductos/actualizarCategoriaProducto/{id}(id=${categoriaProducto.id})}" method="post">
     <input type="hidden" name="_method" value="put">
 
     <div class="form-group my-2">
-        <label for="categoria">Categoria:</label>
+        <label for="categoria" class="form-label">Categoria:</label>
         <input type="text" id="categoria" name="categoria" class="form-control" th:value="${categoriaProducto.categoria}" required>
     </div>
 
-    <button type="submit" class="btn btn-success">Actualizar Categoría</button>
+    <button type="submit" class="btn btn-success w-100 w-sm-auto">Actualizar Categoría</button>
 </form>
 
 </body>

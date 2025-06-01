@@ -49,8 +49,8 @@
 	        <img th:src="@{/img/img_logoChocolateria.png}" alt="Logo" height="65">
 	      </a>
 	
-	      <form action="/buscar" class="d-flex ms-auto" role="search" method="get">
-	        <input class="form-control me-2" type="search" name="q" placeholder="¿Qué estas buscando?" aria-label="Buscar" autocomplete="off">
+	      <form action="/buscar" class="d-flex flex-wrap ms-auto mt-2 mt-lg-0" role="search" method="get">
+	        <input class="form-control me-2 mb-2 mb-lg-0" type="search" name="q" placeholder="¿Qué estas buscando?" aria-label="Buscar" autocomplete="off">
 	        <button class="btn btn-outline-success" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 	      </form>
 	
@@ -59,9 +59,9 @@
 	</nav>
 	
 	<div class="container-fluid p-2">
-		<div class="row p-2">
-			<div class="col">Chocolateria Artesanal</div>
-			<div class="col-1 d-flex align-items-center">
+		<div class="row p-2 align-items-center">
+			<div class="col-10 col-sm-11">Chocolateria Artesanal</div>
+			<div class="col-2 col-sm-1 text-end">
 				<a th:href="@{/carrito}" class="ms-auto" style="text-decoration: none;">
 					<i class="fa-solid fa-cart-shopping fa-lg"></i><span id="cantidadCarrito" class="ms-1" style="display: inline-block;"></span>
 				</a>
