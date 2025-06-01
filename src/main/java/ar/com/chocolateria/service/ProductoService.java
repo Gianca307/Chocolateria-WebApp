@@ -32,7 +32,7 @@ public class ProductoService {
 	}
 	
 	public List<Producto> listarProductosPorCategoria(String categoria){
-		CategoriaProductoOferta categoriaProductoOferta = categoriaProductoOfertaRepository.findByCategoria(categoria);
+		CategoriaProductoOferta categoriaProductoOferta = categoriaProductoOfertaRepository.findByCategoriaIgnoreCase(categoria);
 		
 		return productoRepository.findByCategoriaProductoOferta(categoriaProductoOferta);
 	}

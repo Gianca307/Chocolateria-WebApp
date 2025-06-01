@@ -7,5 +7,5 @@ import ar.com.chocolateria.domain.CategoriaProductoOferta;
 
 @Repository
 public interface CategoriaProductoOfertaRepository extends JpaRepository<CategoriaProductoOferta, Long> {
-	CategoriaProductoOferta findByCategoria(String categoria);
+	CategoriaProductoOferta findByCategoriaIgnoreCase(String categoria);
 }

@@ -23,7 +23,7 @@ public class AuthController {
 	private final ProductoService productoService;
 	
 	@GetMapping({"/" , "/home"})
-	public String redireccionarPaginaPrincipal(org.springframework.ui.Model model) {
+	public String redireccionarPaginaPrincipal(Model model) {
 		model.addAttribute("productosHome", this.productoService.listarProductos());		
 		return "home";
 	}
