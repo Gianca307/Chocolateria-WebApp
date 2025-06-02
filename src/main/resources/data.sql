@@ -104,9 +104,9 @@ INSERT INTO productos_vendidos (`id`,`cantidad`,`precio`,`producto_id`,`venta_id
 (5,3,45,1,2);
 
 INSERT INTO usuario (`id`,`apellido`,`contrasena`,`nombre`,`rol`,`username`) VALUES 
-(1,'Portaluppi','{bcrypt}$2a$10$chM7WRD3cTqC4l7.fIelMeweZUutcFX7CT3MwIEliiiebOaegQlp6','Giancarlo','ROL_LECTURA','Porta'),
-(2,'Portaluppi','{bcrypt}$2a$10$chM7WRD3cTqC4l7.fIelMeweZUutcFX7CT3MwIEliiiebOaegQlp6','Noelia','ROL_ADMIN','Noe'),
-(3,'Aciar','{bcrypt}$2a$10$chM7WRD3cTqC4l7.fIelMeweZUutcFX7CT3MwIEliiiebOaegQlp6','Estela','ROL_ESCRITURA','Ma');
+(1,'Gomez','{bcrypt}$2a$12$RPXV1MRopHPDM8hqIG9KA.F61eIBnCsnhCcHCiEUfEu5Wcv/s0Gei','Claudio','ROL_LECTURA','lectura'),
+(2,'Munizaga','{bcrypt}$2a$12$0yal6n7r3um0plcB9ib24ecVwLDcXumEHfr1jbkRnYhCeRJyyk1jO','Carlos','ROL_ADMIN','admin'),
+(3,'Lopez','{bcrypt}$2a$12$eatm4XknySoWsDyBjZjYfu/a.w61yg1N6WIDhYpPkJBrU/5kHo9sq','Claudia','ROL_ESCRITURA','escritura');
 
 INSERT INTO valor_agregado (`id`,`descripcion`,`porcentaje`) VALUES 
 (2,'Mano de Obra',100),
