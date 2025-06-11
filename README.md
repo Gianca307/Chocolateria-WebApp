@@ -44,7 +44,7 @@ El endpoint principal de la aplicación se encuentra en:
 
 #### Usuarios de prueba:
 - admin (pass: *admin*)
-- lectura1 (pass: *lectura*)
+- lectura (pass: *lectura*)
 - escritura (pass: *escritura*)
 
 ## Online Report Result Tests
