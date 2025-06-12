@@ -26,15 +26,16 @@ public class CompraService {
 	
 	@Transactional
 	public Compra guardarCompra (Compra compraNueva) {
-		for (InsumoComprado ic : compraNueva.getInsumosComprados()) {
-			Insumo insumoGuardado = insumoRepository.findById(ic.getInsumo().getId()).orElseThrow(()->
-			new RuntimeException("No se pudo encontrar el insumo con el id " + ic.getInsumo().getId()));
+		
+		compraNueva.getInsumosComprados().forEach(insumoComprado -> {
+			Insumo insumoGuardado = insumoRepository.findById(insumoComprado.getInsumo().getId()).orElseThrow(()->
+			new RuntimeException("No se pudo encontrar el insumo con el id " + insumoComprado.getInsumo().getId()));
 			
-			Integer stockNuevo = (ic.getCantidad() * insumoGuardado.getCantidad()) + insumoGuardado.getStock();
+			Integer stockNuevo = (insumoComprado.getCantidad() * insumoGuardado.getCantidad()) + insumoGuardado.getStock();
 			insumoGuardado.setStock(stockNuevo);
 			insumoRepository.save(insumoGuardado);
-			ic.setCompra(compraNueva);
-		}
+			insumoComprado.setCompra(compraNueva);
+		});
 		
 		return compraRepository.save(compraNueva);
 	}
@@ -57,23 +58,19 @@ public class CompraService {
 		
 		Map<Long, Insumo> insumoCache = new HashMap<>();
 
-		// Primera iteración: procesar insumos actualizados
 		for (InsumoComprado ica : insumosCompradosActualizados) {
 		    Long insumoId = ica.getInsumo().getId();
 		    
-		    // Obtener insumo de cache o de la base de datos
 		    Insumo insumoGuardado = insumoCache.computeIfAbsent(insumoId, id -> 
 		        insumoRepository.findById(id).orElseThrow(() -> 
 		            new RuntimeException("No se pudo encontrar el insumo con el id " + id)
 		        )
 		    );
 
-		    if (ica.getId() == null) {
-		        // Nuevo insumo comprado
+		    if (ica.getId() == null) {		     
 		        int stockNuevo = (ica.getCantidad() * insumoGuardado.getCantidad()) + insumoGuardado.getStock();
 		        insumoGuardado.setStock(stockNuevo);
-		    } else {
-		        // Modificación de insumo comprado
+		    } else {		        
 		        insumosCompradosGuardados.stream()
 		            .filter(icg -> ica.getId().equals(icg.getId()) && !icg.getCantidad().equals(ica.getCantidad()))
 		            .findFirst()
@@ -88,13 +85,11 @@ public class CompraService {
 		    ica.setCompra(compraActualizada);
 		}
 
-		// Crear un set con los IDs de los insumos actualizados para detección rápida
 		Set<Long> insumosActualizadosIds = insumosCompradosActualizados.stream()
 		    .map(InsumoComprado::getId)
 		    .filter(Objects::nonNull)
 		    .collect(Collectors.toSet());
 
-		// Segunda iteración: eliminar insumos que no están en la nueva lista
 		for (InsumoComprado icg : insumosCompradosGuardados) {
 		    if (!insumosActualizadosIds.contains(icg.getId())) {
 		        Long insumoId = icg.getInsumo().getId();
@@ -123,15 +118,15 @@ public class CompraService {
 		
 		List<InsumoComprado> insumosCompradosCancelados = compraGuardada.getInsumosComprados();
 		
-		for(InsumoComprado ic: insumosCompradosCancelados) {
-			Insumo insumoGuardado = insumoRepository.findById(ic.getInsumo().getId())
-					.orElseThrow(()-> new RuntimeException("No se pudo encontrar el insumo con el id: " + ic.getInsumo().getId()));
+		insumosCompradosCancelados.forEach(insumoComprado -> {
+			Insumo insumoGuardado = insumoRepository.findById(insumoComprado.getInsumo().getId())
+					.orElseThrow(()-> new RuntimeException("No se pudo encontrar el insumo con el id: " + insumoComprado.getInsumo().getId()));
 			
-			Integer stockCancelado = insumoGuardado.getStock() - (ic.getCantidad() * insumoGuardado.getCantidad());
+			Integer stockCancelado = insumoGuardado.getStock() - (insumoComprado.getCantidad() * insumoGuardado.getCantidad());
 			insumoGuardado.setStock(stockCancelado);
 			
 			insumoRepository.save(insumoGuardado);
-		}
+		});
 		
 		compraRepository.deleteById(id);
 	}

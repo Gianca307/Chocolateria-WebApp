@@ -54,11 +54,11 @@ public class CategoriaProductoService {
 		
 		List<Insumo> insumos = this.ir.findByCategoriaProducto(categoriaProducto);
 		
-		for (Insumo insumo : insumos) {
+		insumos.forEach(insumo -> {
 			insumo.setCategoriaProducto(null);
 			ir.save(insumo);
-		}
-		
+		});
+				
 		cpr.delete(categoriaProducto);
 		
 		Map<String, Boolean> response = new HashMap<>();

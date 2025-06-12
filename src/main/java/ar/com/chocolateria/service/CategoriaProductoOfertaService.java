@@ -55,10 +55,11 @@ public class CategoriaProductoOfertaService {
 		
 		List<Producto> productos = this.productoRepository.findByCategoriaProductoOferta(categoriaProductoOferta);
 		
-		for (Producto producto : productos) {
-			producto.setCategoriaProductoOferta(null);
-			productoRepository.save(producto);
-		}
+		productos.forEach(
+				producto -> {
+				producto.setCategoriaProductoOferta(null);
+				productoRepository.save(producto);
+				});
 		
 		categoriaProductoOfertaRepository.delete(categoriaProductoOferta);
 		
