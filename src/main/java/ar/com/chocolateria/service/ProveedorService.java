@@ -57,10 +57,10 @@ public class ProveedorService {
 		
 		List<Insumo> insumos = this.ir.findByProveedor(proveedor);
 		
-		for (Insumo insumo : insumos) {
+		insumos.forEach(insumo ->{
 			insumo.setProveedor(null);
 			ir.save(insumo);
-		}
+		});
 		
 		pr.delete(proveedor);
 		

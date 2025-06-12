@@ -47,9 +47,10 @@ public class ProductoService {
 		
 		productoNuevo.setCategoriaProductoOferta(categoriaProductoOferta);
 		
-		for (InsumoProducto ip : productoNuevo.getInsumosProductos()) {
-			ip.setProducto(productoNuevo);
-		}
+		productoNuevo.getInsumosProductos().forEach(insumoProducto ->{
+			insumoProducto.setProducto(productoNuevo);
+		});
+		
 		return productoRepository.save(productoNuevo);
 	}
 	
@@ -61,9 +62,9 @@ public class ProductoService {
 		
 		productoActualizado.setCategoriaProductoOferta(categoriaProductoOferta);
 		
-		for (InsumoProducto ip : productoActualizado.getInsumosProductos()) {
-			ip.setProducto(productoActualizado);
-		}
+		productoActualizado.getInsumosProductos().forEach(insumoProducto -> {
+			insumoProducto.setProducto(productoActualizado);
+		});
 		
 		Producto productoExistente = construirProducto(productoActualizado, productoOptional);
 		
@@ -76,10 +77,10 @@ public class ProductoService {
 		
 		List<ProductoVendido> productosVendidos = this.productoVendidoRepository.findByProducto(productoAEliminar);
 		
-		for (ProductoVendido pv : productosVendidos) {
-			pv.setProducto(null);
-			this.productoVendidoRepository.save(pv);
-		}
+		productosVendidos.forEach(productoVendido ->{
+			productoVendido.setProducto(null);
+			this.productoVendidoRepository.save(productoVendido);
+		});
 		
 		productoRepository.deleteById(idProducto);
 	}

@@ -37,8 +37,6 @@ public class VentaService {
 	public Venta guardarVenta (Venta ventaNueva) {
 		List<ProductoVendido> productosVendidos = ventaNueva.getProductosVendidos();
 		
-		
-		//TODO 	hacer todo
 		for (ProductoVendido pv : productosVendidos) {
 			Producto producto = productoRepository.findById(pv.getProducto().getId())
 					.orElseThrow(()-> new RuntimeException("No se encotró el producto con el id: " + pv.getProducto().getId()));

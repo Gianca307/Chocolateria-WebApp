@@ -62,15 +62,15 @@ public class InsumoService {
 		List<InsumoComprado> insumosComprados = this.icr.findByInsumo(insumo);
 		List<InsumoProducto> insumosProductos = this.ipr.findByInsumo(insumo);
 		
-		for (InsumoComprado ic : insumosComprados) {
-			ic.setInsumo(null);
-			this.icr.save(ic);
-		}
+		insumosComprados.forEach(insumoComprado ->{
+			insumoComprado.setInsumo(null);
+			this.icr.save(insumoComprado);
+		});
 		
-		for (InsumoProducto ip : insumosProductos) {
-			ip.setInsumo(null);
-			this.ipr.save(ip);
-		}
+		insumosProductos.forEach(insumoProducto ->{
+			insumoProducto.setInsumo(null);
+			this.ipr.save(insumoProducto);
+		});		
 		
 		ir.delete(insumo);
 		
