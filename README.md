@@ -56,4 +56,4 @@ El endpoint principal de la aplicación se encuentra en:
 ## Información Adicional
 Para cualquier información adicional o consultas: <gianca307@gmail.com>
 
-<p align="center"><b>¡Muchas gracias! 🦔</b></p>
+<p align="center"><b>¡Muchas gracias!</b></p>
