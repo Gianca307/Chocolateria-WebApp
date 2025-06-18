@@ -40,12 +40,22 @@ El endpoint principal de la aplicación se encuentra en:
 
 ## Live Demo
 
-### [Click Here! 🖱️](https://chocolateria-webapp.onrender.com )
+### [Click Here! 🖱️](https://chocolateria-webapp.onrender.com)
+
+Para ingresar al inventario y gestión de recursos debes hacer click en el botón "ingresar", que se encuentra al final de la página de /home.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gianca307/Chocolateria-WebApp/refs/heads/main/src/main/resources/static/home_ingresar.png" />
+</p>
 
 #### Usuarios de prueba:
 - admin (pass: *admin*)
 - lectura (pass: *lectura*)
 - escritura (pass: *escritura*)
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gianca307/Chocolateria-WebApp/refs/heads/main/src/main/resources/static/animacion.gif" />
+</p>
 
 ## Online Report Result Tests
 
