@@ -38,13 +38,7 @@ public class ProveedorServiceTest extends BaseTest{
 	}
 	
 	@Test
-	void guardarProveedor () {
-		assertNotNull(proveedorGuardado.getId());
-		assertEquals("Benjamin", proveedorGuardado.getNombreVendedor());
-		assertEquals("2644444444", proveedorGuardado.getTelefonoContacto());
-	}
-	
-	void saveProveedorTest() {
+	void guardarProveedorTest () {
 		assertNotNull(proveedorGuardado.getId());
 		assertEquals(proveedorGuardado.getNombreEmpresa(), "Jupiter");
 		assertEquals(proveedorGuardado.getTelefonoContacto(), "2644444444");
@@ -52,7 +46,7 @@ public class ProveedorServiceTest extends BaseTest{
 		assertEquals(proveedorGuardado.getEmail(), "bjupiter@hotmail.com");
 		assertEquals(proveedorGuardado.getPaginaWeb(), "www.jupiter.com");
 		assertEquals(proveedorGuardado.getDireccion(), "mitre 1520 este");
-		assertEquals(proveedorGuardado.getHoraAtencion(), "20:00");		
+		assertEquals(proveedorGuardado.getHoraAtencion(), "20:00");
 	}
 	
 	@Test
