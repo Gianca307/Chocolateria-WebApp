@@ -65,7 +65,32 @@ public class ProveedorServiceTest extends BaseTest{
 	}
 	
 	@Test
-	void eliminarPlataforma() {
+	void actualizarProveedorTest() {
+		Long idProveedor = 46L;
+		Proveedor proveedorActualizado = new Proveedor();
+		
+		proveedorActualizado.setNombreEmpresa("Cachafaz");
+		proveedorActualizado.setTelefonoContacto("4444444442");
+		proveedorActualizado.setNombreVendedor("Camila");
+		proveedorActualizado.setEmail("cachafaz@hotmail.com");
+		proveedorActualizado.setPaginaWeb("www.cachafaz.com");
+		proveedorActualizado.setDireccion("algun lugar norte");
+		proveedorActualizado.setHoraAtencion("21:00");
+		
+		Proveedor proveedorDespuesDeActualizar = this.proveedorService.actualizarProveedor(idProveedor, proveedorActualizado);
+		
+		assertNotNull(proveedorDespuesDeActualizar.getId());
+		assertEquals(proveedorDespuesDeActualizar.getNombreEmpresa(), "Cachafaz");
+		assertEquals(proveedorDespuesDeActualizar.getTelefonoContacto(), "4444444442");
+		assertEquals(proveedorDespuesDeActualizar.getNombreVendedor(), "Camila");
+		assertEquals(proveedorDespuesDeActualizar.getEmail(), "cachafaz@hotmail.com");
+		assertEquals(proveedorDespuesDeActualizar.getPaginaWeb(), "www.cachafaz.com");
+		assertEquals(proveedorDespuesDeActualizar.getDireccion(), "algun lugar norte");
+		assertEquals(proveedorDespuesDeActualizar.getHoraAtencion(), "21:00");
+	}
+	
+	@Test
+	void eliminarProveedorTest() {
 		List<Proveedor> proveedorList = proveedorService.findAll();
 		assertFalse(proveedorList.isEmpty()); // validamos para poder continuar
 		
