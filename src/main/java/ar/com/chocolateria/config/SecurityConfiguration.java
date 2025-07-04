@@ -22,7 +22,7 @@ public class SecurityConfiguration {
 
 		http.userDetailsService(userDetailsService)// le pasamos el user details service para tener las operaciones de login y demas
 			.authorizeHttpRequests(request -> request
-					.requestMatchers("/", "home/**", "/buscar", "/carrito").permitAll() // esto es para que cualquier persona pueda acceder a estas direcciones
+					.requestMatchers("/", "/home/**", "/buscar", "/carrito", "/h2-console/**").permitAll() // esto es para que cualquier persona pueda acceder a estas direcciones
 					.requestMatchers("/js/home.js", "/js/carrito.js").permitAll()
 					.requestMatchers("/img/**").permitAll()
 					.requestMatchers("/panels/gestorRoles").hasAuthority("ROL_ADMIN")
@@ -37,7 +37,8 @@ public class SecurityConfiguration {
 			.logout(logout -> logout
 				    .permitAll()
 				    .logoutSuccessUrl("/home"))
-			.headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)); // solicitudes por el mismo origen
+			.headers(header -> header.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin)) // solicitudes por el mismo origen
+			.csrf(csrf -> csrf.disable());
 
 		return http.build();
 	}
