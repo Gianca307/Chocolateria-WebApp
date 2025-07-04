@@ -44,7 +44,7 @@ public class AuthController {
 	@GetMapping("/buscar")
     public String buscar(@RequestParam("q") String consulta, Model model) {
         model.addAttribute("productosHome", productoService.buscar(consulta));
-        return "home"; // devuelve el nombre del template (ej: resultado-busqueda.html)
+        return "home";
     }
 	
 	@GetMapping("/login")
@@ -61,7 +61,7 @@ public class AuthController {
 	@PostMapping("/registro")
 	public String registrarUsuario(@ModelAttribute Usuario usuario) {
 		this.customUserDetailsService.guardarUsuario(usuario);
-		return "redirect:/login";
+		return "redirect:/gestorRoles";
 	}
 	
 }
