@@ -31,14 +31,14 @@ public class CategoriaProductoOfertaService {
 	
 	public CategoriaProductoOferta findById(Long id) {
 		CategoriaProductoOferta categoriaProductoOferta = this.categoriaProductoOfertaRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("La categoria con ese ID no existe" + id));
+				.orElseThrow(() -> new ResourceNotFoundException("La categoria con el id " + id + " no existe."));
 		return categoriaProductoOferta;
 	}
 	
 	@Transactional
 	public CategoriaProductoOferta actualizarCategoriaProductoOferta(Long id, CategoriaProductoOferta cpRequest){
 		CategoriaProductoOferta categoriaProductoOferta = this.categoriaProductoOfertaRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("La categoria con ese ID no existe" + id));
+				.orElseThrow(() -> new ResourceNotFoundException("La categoria con el id " + id + " no existe."));
 		
 		categoriaProductoOferta.setCategoria(cpRequest.getCategoria());
 		
@@ -51,7 +51,7 @@ public class CategoriaProductoOfertaService {
 	public Map<String, Boolean> eliminarPorId(Long id) {
 		
 		CategoriaProductoOferta categoriaProductoOferta = categoriaProductoOfertaRepository.findById(id)
-				.orElseThrow(() -> new ResourceNotFoundException("La categoria con ese ID no existe" + id));
+				.orElseThrow(() -> new ResourceNotFoundException("La categoria con el id " + id + " no existe."));
 		
 		List<Producto> productos = this.productoRepository.findByCategoriaProductoOferta(categoriaProductoOferta);
 		
