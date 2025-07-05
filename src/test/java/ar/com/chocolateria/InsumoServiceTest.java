@@ -125,7 +125,7 @@ public class InsumoServiceTest extends BaseTest{
 	
 	@Test
 	void obtenerInsumoPorId() {
-		Long idInsumo = 14L;
+		Long idInsumo = 1L;
 		
 		Insumo insumoGuardado = insumoService.findById(idInsumo);
 		
