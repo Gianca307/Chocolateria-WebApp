@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import ar.com.chocolateria.domain.CategoriaProductoOferta;
-import ar.com.chocolateria.domain.InsumoProducto;
 import ar.com.chocolateria.domain.Producto;
 import ar.com.chocolateria.domain.ProductoVendido;
 import ar.com.chocolateria.repository.CategoriaProductoOfertaRepository;
