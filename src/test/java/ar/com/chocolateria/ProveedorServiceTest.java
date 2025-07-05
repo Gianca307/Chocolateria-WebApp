@@ -66,7 +66,7 @@ public class ProveedorServiceTest extends BaseTest{
 	
 	@Test
 	void actualizarProveedorTest() {
-		Long idProveedor = 46L;
+		Long idProveedor = 1L;
 		Proveedor proveedorActualizado = new Proveedor();
 		
 		proveedorActualizado.setNombreEmpresa("Cachafaz");
