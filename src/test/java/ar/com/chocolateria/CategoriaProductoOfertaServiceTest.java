@@ -41,4 +41,31 @@ public class CategoriaProductoOfertaServiceTest {
 		assertFalse(categoriasProductosOferta.isEmpty());		
 	}
 	
+	@Test
+	void actualizarCategoriaProductoOfertaTest() {
+		Long idLongCategoriaProductoOferta = 1L;
+		CategoriaProductoOferta categoriaProductoOfertaActualizado = new CategoriaProductoOferta();
+		categoriaProductoOfertaActualizado.setCategoria("Caramelos");
+		
+		CategoriaProductoOferta categoriaProductoOfertaDespuesDeActualizar = this.categoriaProductoOfertaService.actualizarCategoriaProductoOferta(idLongCategoriaProductoOferta, categoriaProductoOfertaActualizado);
+		
+		assertNotNull(categoriaProductoOfertaDespuesDeActualizar.getId());
+		assertEquals(categoriaProductoOfertaDespuesDeActualizar.getCategoria(), "Caramelos");
+	}
+	
+	@Test
+	void eliminarPorId() {
+		List<CategoriaProductoOferta> categoriaProductosOferta = this.categoriaProductoOfertaService.findAll();
+		Long idCategoriaProductoOfertaAEliminar = categoriaProductosOferta.get(categoriaProductosOferta.size() - 1).getId();
+		
+		this.categoriaProductoOfertaService.eliminarPorId(idCategoriaProductoOfertaAEliminar);
+		
+		Exception exception = assertThrows(RuntimeException.class, ()-> this.categoriaProductoOfertaService.findById(idCategoriaProductoOfertaAEliminar));
+		
+		String messageActual = exception.getMessage();
+		String messageEsperado = "La categoria con el id " + idCategoriaProductoOfertaAEliminar + " no existe.";
+		
+		assertTrue(messageActual.contains(messageEsperado));
+	}
+	
 }
