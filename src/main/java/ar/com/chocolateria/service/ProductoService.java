@@ -11,6 +11,7 @@ import ar.com.chocolateria.domain.ProductoVendido;
 import ar.com.chocolateria.repository.CategoriaProductoOfertaRepository;
 import ar.com.chocolateria.repository.ProductoRepository;
 import ar.com.chocolateria.repository.ProductoVendidoRepository;
+import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 
 @Service
@@ -40,6 +41,7 @@ public class ProductoService {
 		return productoRepository.findByDescripcionContainingIgnoreCase(consulta);
 	}
 	
+	@Transactional
 	public Producto guardarProducto(Producto productoNuevo, Long idCategoriaProductoOferta) {
 		CategoriaProductoOferta categoriaProductoOferta = this.categoriaProductoOfertaRepository.findById(idCategoriaProductoOferta)
 				.orElseThrow(()-> new RuntimeException("No se encontró la categoria con el id: " + idCategoriaProductoOferta));
@@ -53,6 +55,7 @@ public class ProductoService {
 		return productoRepository.save(productoNuevo);
 	}
 	
+	@Transactional
 	public Producto actualizarProducto(Long idProducto, Producto productoActualizado, Long idCategoriaProductoOferta) {
 		Optional<Producto> productoOptional = productoRepository.findById(idProducto);
 		
@@ -60,6 +63,7 @@ public class ProductoService {
 				.orElseThrow(()-> new RuntimeException("No se encontró la categoria con el id: " + idCategoriaProductoOferta));
 		
 		productoActualizado.setCategoriaProductoOferta(categoriaProductoOferta);
+		productoActualizado.setId(idProducto);
 		
 		productoActualizado.getInsumosProductos().forEach(insumoProducto -> {
 			insumoProducto.setProducto(productoActualizado);
@@ -70,6 +74,7 @@ public class ProductoService {
 		return productoRepository.save(productoExistente);
 	}
 	
+	@Transactional
 	public void eliminarProductoPorId (Long idProducto) {
 		Producto productoAEliminar = this.productoRepository.findById(idProducto)
 				.orElseThrow(() -> new RuntimeException("No se pudo encontrar el producto con el id " + idProducto));
