@@ -1,9 +1,12 @@
 package ar.com.chocolateria;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -41,9 +44,19 @@ public class CompraServiceTest {
 		insumosComprados.add(insumoComprado1);
 		insumosComprados.add(insumoComprado2);
 		
+		compra.setPrecio(39438.47f);
+		compra.setFechaCompra(LocalDate.of(2025, 3, 17));
 		compra.setInsumosComprados(insumosComprados);
 		
 		compraGuardada = this.compraService.guardarCompra(compra);		
+	}
+	
+	@Test
+	void guardarCompraTest() {
+		assertNotNull(compraGuardada.getId());
+		assertFalse(compraGuardada.getInsumosComprados().isEmpty());
+		assertEquals(compraGuardada.getFechaCompra(), LocalDate.of(2025, 3, 17));
+		assertEquals(compraGuardada.getPrecio(), 39438.47f);
 	}
 	
 }
