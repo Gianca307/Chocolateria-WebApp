@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class CategoriaProductoOfertaServiceTest {
+public class CategoriaProductoOfertaServiceTest extends BaseTest{
 	private final CategoriaProductoOfertaService categoriaProductoOfertaService;
 	private CategoriaProductoOferta categoriaProductoOfertaGuardado;
 	
