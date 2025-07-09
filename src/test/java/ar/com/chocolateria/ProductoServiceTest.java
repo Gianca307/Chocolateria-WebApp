@@ -62,5 +62,21 @@ public class ProductoServiceTest extends BaseTest{
 		assertEquals(productoGuardado.getPrecio(), 36472.5f);
 		assertEquals(productoGuardado.getImgUrl(), "img de prueba");
 		assertTrue(productoGuardado.getDisponible());
-	}	
+	}
+	
+	@Test
+	void listarProductosTest () {
+		List<Producto> productos = this.productoService.listarProductos();
+		assertFalse(productos.isEmpty());
+	}
+	
+	@Test
+	void listarProductosPorCategoriaTest() {
+		List<Producto> productos = this.productoService.listarProductosPorCategoria("Chocomensajes");
+		
+		productos.stream().forEach(producto ->{
+			assertTrue(producto.getCategoriaProductoOferta().getCategoria().contains("Chocomensajes"));
+		});		
+	}
+	
 }
