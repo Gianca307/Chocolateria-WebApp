@@ -52,6 +52,7 @@ public class CompraService {
 	@Transactional
 	public Compra actualizarCompra (Long idCompraActualizada, Compra compraActualizada) {
 		Optional<Compra> compraOptional = compraRepository.findById(idCompraActualizada);
+		compraActualizada.setId(idCompraActualizada);
 		
 		List<InsumoComprado> insumosCompradosActualizados = compraActualizada.getInsumosComprados();
 		List<InsumoComprado> insumosCompradosGuardados = compraOptional.get().getInsumosComprados();
