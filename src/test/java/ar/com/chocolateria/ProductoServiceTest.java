@@ -79,4 +79,15 @@ public class ProductoServiceTest extends BaseTest{
 		});		
 	}
 	
+	@Test
+	void buscarTest () {
+		List<Producto> productos = this.productoService.buscar("bom");
+		
+		productos.stream().forEach(producto -> {
+			assertTrue(producto.getDescripcion().toLowerCase().contains("bom"));
+		});
+	}
+	
+	
+	
 }
