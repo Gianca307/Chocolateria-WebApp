@@ -65,4 +65,40 @@ public class CompraServiceTest {
 		assertFalse(compras.isEmpty());
 	}
 	
+	@Test
+	void actualizarCompraTest() {
+		Long idCompra = 1L;
+		
+		Compra compra = new Compra();
+		List<InsumoComprado> insumosComprados = new ArrayList<>();
+		
+		InsumoComprado insumoComprado1 = new InsumoComprado();
+		insumoComprado1.setCantidad(3);
+		insumoComprado1.setPrecio(5301f);
+		Insumo insumo = new Insumo();
+		insumo.setId(5L);
+		insumoComprado1.setInsumo(insumo);
+		
+		InsumoComprado insumoComprado2 = new InsumoComprado();
+		insumoComprado2.setCantidad(10);
+		insumoComprado2.setPrecio(3199f);
+		Insumo insumo1 = new Insumo();
+		insumo1.setId(7L);
+		insumoComprado2.setInsumo(insumo);
+		
+		insumosComprados.add(insumoComprado1);
+		insumosComprados.add(insumoComprado2);
+		
+		compra.setPrecio(31990f);
+		compra.setFechaCompra(LocalDate.of(2025, 3, 17));
+		compra.setInsumosComprados(insumosComprados);
+		
+		Compra compraDespuesDeActualizar = this.compraService.actualizarCompra(idCompra, compra);
+		
+		assertNotNull(compraDespuesDeActualizar.getId());
+		assertFalse(compraDespuesDeActualizar.getInsumosComprados().isEmpty());
+		assertEquals(compraDespuesDeActualizar.getFechaCompra(), LocalDate.of(2025, 3, 17));
+		assertEquals(compraDespuesDeActualizar.getPrecio(), 31990f);
+	}
+	
 }
