@@ -101,4 +101,20 @@ public class CompraServiceTest {
 		assertEquals(compraDespuesDeActualizar.getPrecio(), 31990f);
 	}
 	
+	@Test
+	void eliminarCompraPorIdTest() {
+		List<Compra> compras = this.compraService.listarCompras();
+		Long idCompra = compras.get(compras.size() -1).getId();
+		
+		this.compraService.eliminarCompraPorId(idCompra);
+		
+		Exception exception = assertThrows(RuntimeException.class, () -> this.compraService.obtenerCompraPorId(idCompra));
+		
+		String messageActual = exception.getMessage();
+		String messageEsperado = "No se pudo encontrar la compra con ese id: " + idCompra;
+		
+		assertTrue(messageActual.contains(messageEsperado));
+		
+	}
+	
 }
