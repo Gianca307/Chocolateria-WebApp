@@ -88,6 +88,45 @@ public class ProductoServiceTest extends BaseTest{
 		});
 	}
 	
-	
+	@Test
+	void actualizarProductoTest() {
+		Long idProducto = 1L;
+		Long idCategoriaProducto = 3l;
+		
+		Producto productoActualizado = new Producto();
+		List<InsumoProducto> insumosProductos = new ArrayList<>();
+		
+		InsumoProducto insumoProducto1 = new InsumoProducto();
+		insumoProducto1.setCantidad(20);
+		insumoProducto1.setInsumo(new Insumo());
+		insumoProducto1.getInsumo().setId(1L);
+		
+		InsumoProducto insumoProducto2 = new InsumoProducto();
+		insumoProducto2.setCantidad(40);
+		insumoProducto2.setInsumo(new Insumo());
+		insumoProducto2.getInsumo().setId(2L);
+		
+		insumosProductos.add(insumoProducto1);
+		insumosProductos.add(insumoProducto2);
+		
+		productoActualizado.setDescripcion("producto de prueba");
+		productoActualizado.setCostoBase(14589.14f);
+		productoActualizado.setPrecio(36472.5f);
+		productoActualizado.setImgUrl("img de prueba");
+		productoActualizado.setDisponible(true);
+		productoActualizado.setInsumosProductos(insumosProductos);
+		
+		Producto productoDespuesDeActualizar = this.productoService.actualizarProducto(idProducto, productoActualizado, idCategoriaProducto);
+		
+		assertNotNull(productoDespuesDeActualizar.getId());
+		
+		assertFalse(productoDespuesDeActualizar.getInsumosProductos().isEmpty());
+		assertEquals(productoDespuesDeActualizar.getCategoriaProductoOferta().getId(), 3L);
+		assertEquals(productoDespuesDeActualizar.getDescripcion(), "producto de prueba");
+		assertEquals(productoDespuesDeActualizar.getCostoBase(), 14589.14f);
+		assertEquals(productoDespuesDeActualizar.getPrecio(), 36472.5f);
+		assertEquals(productoDespuesDeActualizar.getImgUrl(), "img de prueba");
+		assertTrue(productoDespuesDeActualizar.getDisponible());
+	}
 	
 }
