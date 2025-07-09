@@ -129,4 +129,19 @@ public class ProductoServiceTest extends BaseTest{
 		assertTrue(productoDespuesDeActualizar.getDisponible());
 	}
 	
+	@Test
+	void eliminarProductoPorIdTest () {
+		List<Producto> productos = this.productoService.listarProductos();
+		Long idProducto = productos.get(productos.size() - 1).getId();
+		
+		this.productoService.eliminarProductoPorId(idProducto);
+		
+		Exception exception = assertThrows(RuntimeException.class, () -> this.productoService.obtenerProductoPorId(idProducto));
+		
+		String messageActual = exception.getMessage();
+		String messageEsperado = "No se encontró el producto con el id: " + idProducto;
+		
+		assertTrue(messageActual.contains(messageEsperado));
+	}
+	
 }
