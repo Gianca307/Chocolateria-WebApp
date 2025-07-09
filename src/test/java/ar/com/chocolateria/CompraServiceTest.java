@@ -59,4 +59,10 @@ public class CompraServiceTest {
 		assertEquals(compraGuardada.getPrecio(), 39438.47f);
 	}
 	
+	@Test
+	void listarComprasTest () {
+		List<Compra> compras = this.compraService.listarCompras();		
+		assertFalse(compras.isEmpty());
+	}
+	
 }
