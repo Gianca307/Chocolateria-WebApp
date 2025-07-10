@@ -66,4 +66,41 @@ public class VentaServiceTest extends BaseTest{
 		assertFalse(ventas.isEmpty());
 	}
 	
+	@Test
+	void actualizarVentaTest() {
+		Long idVenta = 1L;
+		Venta ventaActualizada = new Venta();
+		List<ProductoVendido> productosVendidos = new ArrayList<>();
+		
+		ProductoVendido productoVendido = new ProductoVendido();
+		productoVendido.setCantidad(5);
+		productoVendido.setPrecio(6499.99f);
+		Producto producto = new Producto();
+		producto.setId(1L);
+		productoVendido.setProducto(producto);
+		
+		ProductoVendido productoVendido1 = new ProductoVendido();
+		productoVendido1.setCantidad(2);
+		productoVendido1.setPrecio(14400f);
+		Producto producto1 = new Producto();
+		producto1.setId(2L);
+		productoVendido1.setProducto(producto1);
+		
+		productosVendidos.add(productoVendido1);
+		productosVendidos.add(productoVendido);
+		
+		ventaActualizada.setId(idVenta);
+		ventaActualizada.setFechaVenta(LocalDate.now());
+		ventaActualizada.setPrecio(28800f);
+		ventaActualizada.setProductosVendidos(productosVendidos);
+		
+		Venta ventaDespuesDeActualizar = this.ventaService.actualizarVenta(ventaActualizada, idVenta);
+		
+		assertNotNull(ventaDespuesDeActualizar.getId());
+		
+		assertEquals(ventaDespuesDeActualizar.getFechaVenta(), LocalDate.now());
+		assertEquals(ventaDespuesDeActualizar.getPrecio(), 28800f);
+		assertFalse(ventaDespuesDeActualizar.getProductosVendidos().isEmpty());
+	}
+	
 }
