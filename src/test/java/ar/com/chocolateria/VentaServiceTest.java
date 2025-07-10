@@ -60,4 +60,10 @@ public class VentaServiceTest extends BaseTest{
 		assertFalse(ventaGuardada.getProductosVendidos().isEmpty());
 	}
 	
+	@Test
+	void listarVentasTest() {
+		List<Venta> ventas = this.ventaService.listarVentas();
+		assertFalse(ventas.isEmpty());
+	}
+	
 }
