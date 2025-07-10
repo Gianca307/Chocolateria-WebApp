@@ -18,7 +18,7 @@ import lombok.RequiredArgsConstructor;
 
 @SpringBootTest
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
-public class CompraServiceTest {
+public class CompraServiceTest extends BaseTest{
 	private final CompraService compraService;
 	private Compra compraGuardada;
 	
